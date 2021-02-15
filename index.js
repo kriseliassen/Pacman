@@ -1,6 +1,7 @@
 const width = 28
 const grid = document.querySelector('.grid')
 const scoreDisplay = document.querySelector("#score")
+const userAlert = document.querySelector("#userAlert")
 let squares = []
 let score = 0
 
@@ -232,7 +233,7 @@ function checkForGameOver() {
         //remove event listener from control function
         document.removeEventListener("keyup", control)
         //alert user that game is over
-        alert("Game over!")
+        userAlert.innerHTML = "You lost! Refresh window to play again"
     }
 }
 
@@ -244,7 +245,7 @@ function checkForWin() {
         //remove event listener
         document.removeEventListener("keyup", control)
         //tell user game is won
-        alert("You have won!")
+        userAlert.innerHTML = "You won!  Refresh window to play again"
     }
 }
 

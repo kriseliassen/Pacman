@@ -2,6 +2,14 @@ html,
 body {
 	margin: 10;
 	padding: 10;
+	font-family: monospace;
+	background-color: #fae1dd;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .grid {
@@ -10,6 +18,7 @@ body {
 	width: 420px;
 	height: 420px;
 	border: solid black;
+	margin: 0 auto;
 }
 
 .grid div {
@@ -19,7 +28,7 @@ body {
 
 .pac-dot {
 	background-color: green;
-	border: 5px solid white;
+	border: 5px solid #fae1dd;
 	box-sizing: border-box;
 }
 
@@ -33,7 +42,7 @@ body {
 }
 
 .pacman {
-	background-color: orange;
+	background-color: #ffb703;
 	border-radius: 7.5px;
 	border: none;
 }
@@ -44,7 +53,7 @@ body {
 }
 
 .pinky {
-	background-color: pink;
+	background-color: hotpink;
 	border: none;
 }
 
