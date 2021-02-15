@@ -46,5 +46,53 @@ function createBoard() {
         const square = document.createElement('div')
         grid.appendChild(square)
         squares.push(square)
+
+        if (layout[i] === 0) {
+            squares[i].classList.add('pac-dot')
+        } else if (layout[i] === 1) {
+            squares[i].classList.add('wall')
+        } else if (layout[i] === 3) {
+            squares[i].classList.add('power-pellet')
+        }
     }
 }
+
+createBoard()
+
+//starting position of pacman
+let pacmanCurrentIndex = 500
+squares[pacmanCurrentIndex].classList.add("pacman")
+
+//function to control pacman
+// 40 - down
+// 39 - right
+// 38 - up
+// 37 - left
+
+function control(e) {
+    squares[pacmanCurrentIndex].classList.remove("pacman")
+    switch(e.keyCode) {
+        case 40:
+            console.log('pressed down')
+            if(pacmanCurrentIndex + width < width*width) pacmanCurrentIndex += width
+        break
+
+        case 39:
+            console.log('pressed right')
+            if (pacmanCurrentIndex % width < width-1) pacmanCurrentIndex +=1
+        break
+        
+        case 38:
+            console.log('pressed up')
+            if(pacmanCurrentIndex - width >=0) pacmanCurrentIndex -=width
+        break
+
+        case 37:
+            console.log('pressed left')
+            if(pacmanCurrentIndex % width !== 0) pacmanCurrentIndex -=1
+        break
+    }
+    squares[pacmanCurrentIndex].classList.add("pacman")
+}
+
+document.addEventListener('keyup', control)
