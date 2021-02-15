@@ -181,10 +181,8 @@ ghosts.forEach(ghost => moveGhost(ghost))
 
 
 function moveGhost(ghost) {
-    console.log("moved ghost")
     const directions = [-1, +1, -width, +width]
     let direction = directions[Math.floor(Math.random() * directions.length)]
-    console.log(direction)
 
     ghost.timerID = setInterval(function() {
         if(
@@ -216,12 +214,25 @@ function moveGhost(ghost) {
             squares[ghost.currentIndex].classList.add(ghost.className, "ghost")
         }
 
-
+        checkForGameOver()
     }, ghost.speed)
 }
 
-
-
+//check for Game Over
+function checkForGameOver() {
+    //if square pacman is in contains ghost AND square does NOT contain scared-ghost
+    if(
+        squares[pacmanCurrentIndex].classList.contains("ghost") &&
+        !squares[pacmanCurrentIndex].classList.contains("scared-ghost")
+    ) {
+        //for each ghost - stop it moving
+        ghosts.forEach(ghost => clearInterval(ghost.timerID))
+        //remove event listener from control function
+        document.removeEventListener("keyup", control)
+        //alert user that game is over
+        alert("Game over!")
+    }
+}
 
 
 
