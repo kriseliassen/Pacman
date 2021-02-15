@@ -79,7 +79,9 @@ function control(e) {
             if(
                 !squares[pacmanCurrentIndex + width].classList.contains("wall") &&
                 !squares[pacmanCurrentIndex + width].classList.contains("ghost-lair") &&
-                pacmanCurrentIndex + width < width*width) pacmanCurrentIndex += width
+                pacmanCurrentIndex + width < width*width
+                ) 
+                pacmanCurrentIndex += width
         break
 
         case 39:
@@ -87,7 +89,13 @@ function control(e) {
             if (
                 !squares[pacmanCurrentIndex + 1].classList.contains("wall") &&
                 !squares[pacmanCurrentIndex + 1].classList.contains("ghost-lair") &&
-                pacmanCurrentIndex % width < width-1) pacmanCurrentIndex +=1
+                pacmanCurrentIndex % width < width-1
+                ) 
+                pacmanCurrentIndex +=1
+                if(pacmanCurrentIndex === 391) {
+                pacmanCurrentIndex = 364
+            }
+
         break
         
         case 38:
@@ -95,7 +103,9 @@ function control(e) {
             if(
                 !squares[pacmanCurrentIndex - width].classList.contains("wall") &&
                 !squares[pacmanCurrentIndex - width].classList.contains("ghost-lair") &&
-                pacmanCurrentIndex - width >=0) pacmanCurrentIndex -=width
+                pacmanCurrentIndex - width >=0
+                ) 
+                pacmanCurrentIndex -=width
         break
 
         case 37:
@@ -103,7 +113,12 @@ function control(e) {
             if(
                 !squares[pacmanCurrentIndex - 1].classList.contains("wall") &&
                 !squares[pacmanCurrentIndex - 1].classList.contains("ghost-lair") &&
-                pacmanCurrentIndex % width !== 0) pacmanCurrentIndex -=1
+                pacmanCurrentIndex % width !== 0
+                ) 
+                pacmanCurrentIndex -=1
+                if(pacmanCurrentIndex === 364) {
+                pacmanCurrentIndex = 391
+            }
         break
     }
     squares[pacmanCurrentIndex].classList.add("pacman")
