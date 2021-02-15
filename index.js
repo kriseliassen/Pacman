@@ -2,6 +2,7 @@ const width = 28
 const grid = document.querySelector('.grid')
 const scoreDisplay = document.querySelector("#score")
 let squares = []
+let score = 0
 
 // 0 - pacdots
 // 1 - wall
@@ -62,7 +63,7 @@ function createBoard() {
 createBoard()
 
 //starting position of pacman
-let pacmanCurrentIndex = 500
+let pacmanCurrentIndex = 490
 squares[pacmanCurrentIndex].classList.add("pacman")
 
 //function to control pacman
@@ -75,7 +76,6 @@ function control(e) {
     squares[pacmanCurrentIndex].classList.remove("pacman")
     switch(e.keyCode) {
         case 40:
-            console.log('pressed down')
             if(
                 !squares[pacmanCurrentIndex + width].classList.contains("wall") &&
                 !squares[pacmanCurrentIndex + width].classList.contains("ghost-lair") &&
@@ -85,7 +85,6 @@ function control(e) {
         break
 
         case 39:
-            console.log('pressed right')
             if (
                 !squares[pacmanCurrentIndex + 1].classList.contains("wall") &&
                 !squares[pacmanCurrentIndex + 1].classList.contains("ghost-lair") &&
@@ -99,7 +98,6 @@ function control(e) {
         break
         
         case 38:
-            console.log('pressed up')
             if(
                 !squares[pacmanCurrentIndex - width].classList.contains("wall") &&
                 !squares[pacmanCurrentIndex - width].classList.contains("ghost-lair") &&
@@ -109,7 +107,6 @@ function control(e) {
         break
 
         case 37:
-            console.log('pressed left')
             if(
                 !squares[pacmanCurrentIndex - 1].classList.contains("wall") &&
                 !squares[pacmanCurrentIndex - 1].classList.contains("ghost-lair") &&
@@ -122,6 +119,36 @@ function control(e) {
         break
     }
     squares[pacmanCurrentIndex].classList.add("pacman")
+    pacDotEaten()
 }
 
 document.addEventListener('keyup', control)
+
+function pacDotEaten() {
+    if (squares[pacmanCurrentIndex].classList.contains("pac-dot")) {
+        squares[pacmanCurrentIndex].classList.remove("pac-dot")
+        score++
+        scoreDisplay.innerHTML = score
+    }
+}
+
+class Ghost {
+    constructor(className, startIndex, speed) {
+        this.className = className
+        this.startIndex = startIndex
+        this.speed = speed
+        this.currentIndex = startIndex
+        this.isScared = false
+        this.timerID = NaN
+    }
+}
+
+const ghosts = [
+    new Ghost('blinky', 348, 250),
+    new Ghost('pinky', 376, 400),
+    new Ghost('inky', 351, 300),
+    new Ghost('clyde', 379, 500)
+]
+
+//Draw ghosts onto grid
+ghosts.forEach(ghost => squares[ghost.startIndex].classList.add(ghost.className))
